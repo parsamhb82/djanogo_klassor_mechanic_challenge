@@ -60,8 +60,10 @@ class ServiceManager:
 
 class Service:
 
-    def __init__(self,id ,price = None ,start_time = None ,finish_time = None ,mechanic = None ) -> None:
+    def __init__(self,id ,user = None, mechanic = None, price = None ,start_time = None ,finish_time = None ,mechanic = None ) -> None:
         self.__id = id
+        self.__user = user
+        self.__mechanic = mechanic
     
     def set_price(self , price):
         self.__price = price
