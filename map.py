@@ -1,7 +1,9 @@
+import heapq
 class Node :
-    def __init__(self , x , y) -> None:
+    def __init__(self , x , y, garage_bool) -> None:
         self.x = x
         self.y = y 
+        self.garage_bool = garage_bool
 
 
 class Maps : 
@@ -9,15 +11,11 @@ class Maps :
         self.nodes_list = []
 
     def return_jason_to_map (self) : 
-        pass 
-
-class Garage : 
+        pass
     
-    def __init__(self , x , y) -> None:
-        self.x = x
-        self.y = y 
+    def coordinate_to_node(self, x, y):
+        return #node
+    
+    def a_star(self, start_x, start_y, goal_x, goal_y):
+        pass
 
-class Garage_manager : 
- 
-    def __init__(self) -> None:
-        self.garage_list = []
