@@ -1,16 +1,20 @@
 import socket
 import threading
+from map import Maps
+from final_project import ServiceManager
+from main import MechanicManager
+from grage2 import GarageMananger
 
 
 
 class SocketServer:
     def __init__(self):
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.map = Map()
+        self.map = Maps()
         self.map.read_json()
         self.servis_manager = ServiceManager().load(self.map)
         self.mechanic_manager = MechanicManager().load(self.map)
-        self.garage_manager = GarageManager().load(self.map)
+        self.garage_manager = GarageMananger().load(self.map)
     def start(self):
         server_host = socket.gethostbyname(socket.gethostname())
         print(f"Server running on {server_host}")
