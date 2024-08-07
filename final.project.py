@@ -60,10 +60,10 @@ class ServiceManager:
 
 class Service:
 
-    def __init__(self,id ,user = None, mechanic = None, price = None ,start_time = None ,finish_time = None ,mechanic = None ) -> None:
-        self.__id = id
+    def __init__(self,id ,user = None, price = None ,start_time = None ,finish_time = None ,mechanic = None ) -> None:
+        self.__id = id  
+    def set_user(self, user):      
         self.__user = user
-        self.__mechanic = mechanic
     
     def set_price(self , price):
         self.__price = price
@@ -78,6 +78,23 @@ class Service:
 
     def set_mechanic_type(self , mechanic):
         self.__mechanic = mechanic
+
+    def get_user(self, user):      
+        return self.__user
+    
+    def get_price(self , price):
+        return self.__price
+
+    def get_start_time(self):
+        return self.__start_time
+    
+    def get_finish_time(self):
+        return self.__finish_time
+
+    def get_mechanic_type(self , mechanic):
+        return self.__mechanic    
+        
+
 
 
 class User:
