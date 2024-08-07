@@ -58,6 +58,9 @@ class ServiceManager:
     def add_service(self, service_obj):
         self.__service_list.append(service_obj)
 
+    def __str__(self):
+        return '\n'.join([str(service) for service in self.__service_list])
+
 class Service:
 
     def __init__(self,id ,user = None, price = None ,start_time = None ,finish_time = None ,mechanic = None ) -> None:
@@ -94,7 +97,8 @@ class Service:
     def get_mechanic_type(self , mechanic):
         return self.__mechanic    
         
-
+    def __str__(self) -> str:
+        return f"name = {self.get_user().get_name()} id = {self.get_user().get_id()} start = {self.get_start_time()} type = {self.get_mechanic_type()}"
 
 
 class User:
