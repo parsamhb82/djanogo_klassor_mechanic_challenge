@@ -25,7 +25,13 @@ class UserManager:
         return False
     
     def add_member(self ,name, id, x, y, service):
-        self.__user_list.append(User(name, id, x, y, service))
+        for user in self.__user_list:
+            if user.get_id == id:
+                return user
+        new_user = User(name, id, x, y, service)
+        self.__user_list.append(new_user)
+        return new_user
+
 
 
 class ServiceManager:
@@ -54,9 +60,7 @@ class ServiceManager:
 
 class Service:
 
-    def __init__(self ,x ,y ,id ,price = None ,start_time = None ,finish_time = None ,mechanic = None ) -> None:
-        self.__x = x
-        self.__y = y
+    def __init__(self,id ,price = None ,start_time = None ,finish_time = None ,mechanic = None ) -> None:
         self.__id = id
     
     def set_price(self , price):
