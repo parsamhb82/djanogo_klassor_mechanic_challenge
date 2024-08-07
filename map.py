@@ -1,9 +1,15 @@
 import heapq
 class Node :
     def __init__(self , x , y, garage_bool) -> None:
-        self.x = x
-        self.y = y 
-        self.garage_bool = garage_bool
+        self._x = x
+        self._y = y 
+        self._garage_bool = garage_bool
+    def node_x_getter(self):
+        return self._x
+    def node_y_getter(self):
+        return self._y
+    def garage_bool_getter(self):
+        return self._garage_bool
 
 
 class Maps : 
@@ -18,4 +24,5 @@ class Maps :
     
     def a_star(self, start_x, start_y, goal_x, goal_y):
         pass
+        
 
