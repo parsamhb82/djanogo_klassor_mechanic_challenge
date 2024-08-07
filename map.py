@@ -106,6 +106,10 @@ class Maps :
                     heapq.heappush(open_list, (f_score, neighbor_node))
 
         return float('inf')
+    def drone_distance(self, start_x, start_y, goal_x, goal_y):
+        start_node = self.coordinate_to_node(start_x, start_y)
+        goal_node = self.coordinate_to_node(goal_x, goal_y)
+        return self.heuristic(start_node, goal_node)
 
         
 
