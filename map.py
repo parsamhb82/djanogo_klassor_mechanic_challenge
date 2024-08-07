@@ -23,6 +23,7 @@ class Maps :
         return #node
     
     def a_star(self, start_x, start_y, goal_x, goal_y):
-        pass
+        start_node = self.coordinate_to_node(start_x, start_y)
+        goal_node = self.coordinate_to_node(goal_x, goal_y)
         
 
