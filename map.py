@@ -34,8 +34,8 @@ class Maps :
     def return_jason_to_map (self) : 
         with open("graph.json", 'r') as graph_file:
             g = json.load(graph_file)
-            nodes = g["nodes"]
-            edges = g["edges"]
+            nodes = g["Nodes"]
+            edges = g["Edges"]
             for node in nodes:
                 self.add_node(node['X'], node['Y'], node['Name'])
             for edge in edges:
@@ -52,7 +52,7 @@ class Maps :
             node : Node
             x_node = node.node_x_getter()
             y_node = node.node_y_getter()
-            dis = (((x - x_node) + (y - y_node))**2)**0.5
+            dis = (((x - x_node)**2 + (y - y_node)**2))**0.5
             if dis < min_distance :
                 min_distance = dis
                 wanted_node = node
@@ -60,38 +60,52 @@ class Maps :
             
 
     
-    def get_diatance(self, start_x, start_y, goal_x, goal_y):
+    def get_distance(self, start_x, start_y, goal_x, goal_y):
         start_node = self.coordinate_to_node(start_x, start_y)
         goal_node = self.coordinate_to_node(goal_x, goal_y)
 
-        return self.a_star(start_node, goal_node)
+        return self.A_star(start_node, goal_node)
     
-    def add_node(self, x, y):
-        self.nodes_list.append(Node(x, y))
+    def add_node(self, x, y, name):
+        self.nodes_list.append(Node(x, y, name))
     
     def heuristic (self , node1 , node2 ) : 
-        return math.sqrt( (node1.get_x() - node2.get_x()) **2 + (node1.get_y() - node2.get_y()) **2 )
+        node1 : Node
+        node2 : Node
+        return math.sqrt( (node1.node_x_getter() - node2.node_x_getter()) **2 + (node1.node_y_getter() - node2.node_y_getter()) **2 )
 
     def A_star (self , start_node , end_node) : 
-        open_list = [start_node]
-        close_list = set()
-        g = {}
-        g [start_node.get_name()] = 0 
-        while len(open_list) > 0 : 
-            mini = open_list[0]
-            for node in open_list : 
-                if g[node] + self.heuristic(node, end_node) < g[mini] + self.heuristic(mini, end_node) : 
-                    mini = node 
+        open_list = []
+        heapq.heappush(open_list, (0, start_node))
+        closed_list = set()
+        g = {start_node.get_name(): 0}
+        came_from = {}
 
-        if mini == 0 :
-            print ("path does not exist ! ") 
-            return None
-        if mini.get_name() == end_node.get_name() : 
-            return g[mini]
-        for (m, weight) in mini.get_neighbors():
-            if m not in open_list and m not in close_list: 
-                open_list.add(m)
-                g[m.get_name()] = g[mini.get_name()] + weight
-    
+        while open_list:
+            current_cost, current_node = heapq.heappop(open_list)
+
+            if current_node.get_name() in closed_list:
+                continue
+
+            if current_node.get_name() == end_node.get_name():
+                return g[current_node.get_name()]
+
+            closed_list.add(current_node.get_name())
+
+            for neighbor_name, weight in current_node.get_neighbor():
+                neighbor_node = self.nodes_list[neighbor_name]
+                tentative_g_score = g[current_node.get_name()] + weight
+
+                if neighbor_name in closed_list:
+                    continue
+
+                if tentative_g_score < g.get(neighbor_name, float('inf')):
+                    came_from[neighbor_name] = current_node
+                    g[neighbor_name] = tentative_g_score
+                    f_score = tentative_g_score + self.heuristic(neighbor_node, end_node)
+                    heapq.heappush(open_list, (f_score, neighbor_node))
+
+        return float('inf')
+
         
 
