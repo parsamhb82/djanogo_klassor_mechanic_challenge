@@ -1,23 +1,23 @@
+import heapq
+
 class Node :
-    def __init__(self , x , y) -> None:
+
+    def __init__(self , x , y , garage_bool) -> None:
         self.x = x
         self.y = y 
+        self.garage_bool = garage_bool
 
-
-class Maps : 
+class Maps :
+    def heuristic (self) : 
+        pass 
+        return abs (ord(a) - ord (b) )
+    
+    def A_star (self) : 
+     
+       
     def __init__(self) -> None:
         self.nodes_list = []
 
     def return_jason_to_map (self) : 
         pass 
 
-class Garage : 
-    
-    def __init__(self , x , y) -> None:
-        self.x = x
-        self.y = y 
-
-class Garage_manager : 
- 
-    def __init__(self) -> None:
-        self.garage_list = []
